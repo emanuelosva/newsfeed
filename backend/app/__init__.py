@@ -15,7 +15,10 @@ def create_app():
     """
     app = Flask(__name__)
 
-    from .users import api
-    app.register_blueprint(api.bp)
+    from .users import api as api_users
+    from .news import api as api_news
+
+    app.register_blueprint(api_users.bp)
+    app.register_blueprint(api_news.bp)
 
     return app

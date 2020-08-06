@@ -132,7 +132,9 @@ def login():
 
         # Login the user and generate jwt
         # user = db.login(mail, password)
-        user = {'name': 'Stan', 'subscriptions': ['el_universal', 'excelsior']}
+        id = str(uuid4())
+        user = {'id': id, 'name': 'Stan',
+                'subscriptions': ['el_universal', 'excelsior']}
         if user is not None:
             # The credentials are correct
             token = auth.encode(user)
