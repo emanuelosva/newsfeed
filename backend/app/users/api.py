@@ -42,16 +42,16 @@ def users_subscription():
     """
     # Verify token and check authentication
     try:
+        # Authentication by jwt
         bearer = request.headers.get('Authorization')
         json_web_token = bearer.split(' ')[1]
         valid_token = auth.verify(json_web_token)
 
-        # Make sure the body has the correct schema by try
+        # Data from
         body = request.get_json()
         user_id = body['id']
         news_name = body['news_name']
 
-        # Make the operation acording to the method
         if request.method == 'POST':
             # result = db.add_new_to_user(user_id, news_name)
             return make_response(error=False, message='Suscribed', status=201)
@@ -60,12 +60,14 @@ def users_subscription():
             return make_response(error=False, message='Unsuscribed', status=200)
 
     except (InvalidSignatureError, DecodeError, AttributeError):
+        # If invalid jwt
         return make_response(error=True, message='Unauthorized', status=401)
 
     except (KeyError, TypeError):
+        # If invalid body schema
         message = 'id and news_name are needed'
         return make_response(error=True, message=message, status=400)
-        
+
     except Exception:
         # Return a 500 error if something went wrong
         return make_response(error=True, message='Server serror', status=500)
@@ -86,21 +88,23 @@ def signup():
     - password: str, The user password
     """
 
-    # Make sure the body has the correct schema
-    body = request.get_json()
     try:
+        # Get data from body
+        body = request.get_json()
         name = body['name']
         email = body['email']
         password = body['password']
-    except (KeyError, TypeError):
-        message = 'name, email and password are needed'
-        return make_response(error=True, message=message, status=400)
 
-    # Create the user
-    try:
+        # Create the user
         id = uuid4()
         # result = db.create_user(id, name, email, password)
         return make_response(error=False, message='User created', status=201)
+
+    except (KeyError, TypeError):
+        # If invalid body schema
+        message = 'name, email and password are needed'
+        return make_response(error=True, message=message, status=400)
+
     except Exception:
         # Return a 500 error if something went wrong
         return make_response(error=True, message='Server serror', status=500)
@@ -118,25 +122,29 @@ def login():
     - password: str, The user password
     """
 
-    # Make sure the body has the correct schema
-    body = request.get_json()
     try:
+        # Get data from body
+        body = request.get_json()
         email = body['email']
         password = body['password']
-    except (KeyError, TypeError):
-        message = 'email and password are needed'
-        return make_response(error=True, message=message, status=400)
 
-    # Login the user and generate jwt
-    try:
+        # Login the user and generate jwt
         # user = db.login(mail, password)
         user = { 'name': 'Stan', 'subscriptions': ['el_universal', 'excelsior'] }
         if user is not None:
+            # The credentials are correct
             token = auth.encode(user)
             data= { 'token': token, 'user': user}
             return make_response(error=False, message='Logged', status=200, data=data)
         else:
+            # The user does not exist or icorrect password
             return make_response(error=True, message='Unauthorized', status=401)
 
+    except (KeyError, TypeError):
+        # If invalid body schema
+        message = 'email and password are needed'
+        return make_response(error=True, message=message, status=400)
+
     except Exception:
+        # Return a 500 error if something went wrong
         return make_response(error=True, message='Server Error', status=500)
