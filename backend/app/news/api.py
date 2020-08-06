@@ -33,7 +33,10 @@ def get_news_info():
                 'url_image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRBcbMGm0cyWxX_SzYle0fV13mhmMmWS3_ZBg&usqp=CAU',
                 'url': 'https://daily-buggle.com/breaking-news/tony-missing'
             }
-            return make_response(error=False, message='News Retrieved', status=200, data=news_info)
+            if not news_info:
+                return make_response(error=True, message='Not Found', status=404)
+            else:
+                return make_response(error=False, message='News Retrieved', status=200, data=news_info)
         else:
             raise KeyError
 
