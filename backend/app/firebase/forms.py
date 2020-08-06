@@ -7,7 +7,7 @@ class SignupForms():
         self.password = password
         self.passwd_conf = passwd_confirm
 
-    def signup_passwords(self):
+    def validate_passwords(self):
         """Comparate password and password confirmation from signup form,
         return boolean data type.
         """
