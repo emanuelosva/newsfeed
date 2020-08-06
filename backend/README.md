@@ -106,11 +106,14 @@ Returns:
 > method: POST -- path: /useres/signup
 
 Description: Register a new user
-Body: { User schema }
+Body: { name: str, email: str, password:str }
 Returns:
 - Status: 201
 - Type: Application/json
-- Value: { operation: 'sucessfull' }
+- Value: {
+    "error": false,
+    "message": "User created"
+}
 
 > method: POST -- path: /usres/login
 
