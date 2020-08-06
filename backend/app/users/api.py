@@ -1,16 +1,16 @@
 """User endpoints"""
 
-from flask import Blueprint, request, jsonify, Response
+from flask import Blueprint, request, jsonify
 from uuid import uuid4
 from typing import List
 import app.users.auth as auth
 from jwt.exceptions import InvalidSignatureError, DecodeError
-import jwt
 
 # Blueprint implementation
 bp = Blueprint('users', __name__, url_prefix='/users')
 
-# Useful funtion
+
+# Useful function
 def make_response(error: bool, message: str, status: int, data={}):
     """
     Create a homogenized response
@@ -19,7 +19,7 @@ def make_response(error: bool, message: str, status: int, data={}):
     - message: str, A message to user for operation status
     - status: int, HTTP status code
     """
-    res = jsonify({ 'error': error, 'message': message, 'data': data })
+    res = jsonify({'error': error, 'message': message, 'data': data})
     return res, status
 
 
@@ -35,7 +35,7 @@ def users_subscription():
     in: body
     - id: str, The user id
     - news_name: str, The new name identifier
-    
+
     DELETE: Remove a subscription to the user subscriptions list
     params:
     in: body
@@ -132,11 +132,11 @@ def login():
 
         # Login the user and generate jwt
         # user = db.login(mail, password)
-        user = { 'name': 'Stan', 'subscriptions': ['el_universal', 'excelsior'] }
+        user = {'name': 'Stan', 'subscriptions': ['el_universal', 'excelsior']}
         if user is not None:
             # The credentials are correct
             token = auth.encode(user)
-            data= { 'token': token, 'user': user}
+            data = {'token': token, 'user': user}
             return make_response(error=False, message='Logged', status=200, data=data)
         else:
             # The user does not exist or incorrect password
