@@ -79,23 +79,29 @@ source start.bash
 
 **Users**
 
-> metjod: POST -- path: /usres/:user_id
+> metjod: POST -- path: /users
 
 Description: Add a news subscription to user subscriptions list
-Body: { News schema }
+Body: { id: str, news_id: str }
 Returns:
 - Status: 201
 - Type: Application/json
-- Value: { operation: 'sucessfull' }
+- Value: {
+    "error": false,
+    "message": "Suscribed"
+}
 
-> metjod: DELETE -- path: /usres/:user_id
+> metjod: DELETE -- path: /users
 
 Description: Remove a news subscription to user subscriptions list
-Body: { news_id: str }
+Body: { id: str, news_id: str }
 Returns:
 - Status: 200
 - Type: Application/json
-- Value: { operation: 'sucessfull' }
+- Value: {
+    "error": false,
+    "message": "Unsuscribed"
+}
 
 > method: POST -- path: /useres/signup
 
