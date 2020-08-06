@@ -12,30 +12,24 @@ from .forms import SignupForms
 
 bp = auth.bp
 
-@bp.route('signup/', methods=['GET', 'POST'])
+@bp.route('signup/', methods=['POST', 'GET'])
 def signup():
     """Logic for input and send data for create new user"""
     if request.method == 'POST':
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
-        passwd_confirm = request.form['password_confirmation']
-        signup_forms = SignupForms(username, email, password, passwd_confirm)
-        
-        if signup_forms.validate_passwords == True:
-            try:
-                user = User(username, email, password)
-                user.create_user()
-                return redirect(url_for('login'))
-            except EmailAlreadyExistsError:
-                error = 'El usuario ya está registrado, por favor verifique sus datos'
-                return render_template('signup.html', error=error)
-        else:
-            error = 'Las contraseña no coincide con la de verificación'
+
+        try:
+            user = User(username, email, password)
+            user.create_user()
+            return redirect(url_for('auth.login'))
+        except EmailAlreadyExistsError:
+            error = 'El usuario ya está registrado, por favor verifique sus datos'
             return render_template('signup.html', error=error)
     return render_template('signup.html')
 
 
-# @bp.route('login', methods=('POST'))
-# def login():
-#     pass
+@bp.route('login', methods=['POST', 'GET'])
+def login():
+    return render_template('login.html')

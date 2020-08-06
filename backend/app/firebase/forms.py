@@ -11,7 +11,7 @@ class SignupForms():
         """Comparate password and password confirmation from signup form,
         return boolean data type.
         """
-        if self.password == self.passwd_confirm:
+        if self.password == self.passwd_conf:
             return True
         else:
             return False 
