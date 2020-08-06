@@ -14,4 +14,11 @@ class User():
         self.username = username
         self.email = email
         self.password = password
-    
+
+    def create_user(self):
+        firebase_admin.auth.create_user(
+            email=self.email, 
+            password=self.password, 
+            username=self.username
+        )
+        
