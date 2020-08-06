@@ -82,7 +82,7 @@ source start.bash
 > metjod: POST -- path: /users
 
 Description: Add a news subscription to user subscriptions list
-Body: { id: str, news_id: str }
+Body: { id: str, news_name: str }
 Returns:
 - Status: 201
 - Type: Application/json
@@ -94,7 +94,7 @@ Returns:
 > metjod: DELETE -- path: /users
 
 Description: Remove a news subscription to user subscriptions list
-Body: { id: str, news_id: str }
+Body: { id: str, news_name: str }
 Returns:
 - Status: 200
 - Type: Application/json
@@ -122,7 +122,17 @@ Body: { User schema }
 Returns:
 - Status: 201
 - Type: Application/json
-- Value: { token: 'json-web-token', User schema }
+- Value: {
+    "data": {
+      "token": str, // jwt
+      "user": {
+          "name": str,
+          "subscriptions": [str]
+      }
+    },
+    "error": false,
+    "message": "Logged"
+}
 
 **News**
 
