@@ -1,3 +1,5 @@
+"""User endpoints"""
+
 from flask import Blueprint, request, jsonify, Response
 from uuid import uuid4
 from typing import List
@@ -40,14 +42,14 @@ def users_subscription():
     - id: str, The user id
     - news_name: str, The news name identifier  
     """
-    # Verify token and check authentication
+
     try:
         # Authentication by jwt
         bearer = request.headers.get('Authorization')
         json_web_token = bearer.split(' ')[1]
         valid_token = auth.verify(json_web_token)
 
-        # Data from
+        # Data from body
         body = request.get_json()
         user_id = body['id']
         news_name = body['news_name']
@@ -115,7 +117,7 @@ def login():
     """
     Login a user
 
-    POST: Login user and sed jwt cifred
+    POST: Login user and send jwt cifred
     params:
     in: body
     - email: str, The user email
@@ -137,7 +139,7 @@ def login():
             data= { 'token': token, 'user': user}
             return make_response(error=False, message='Logged', status=200, data=data)
         else:
-            # The user does not exist or icorrect password
+            # The user does not exist or incorrect password
             return make_response(error=True, message='Unauthorized', status=401)
 
     except (KeyError, TypeError):
