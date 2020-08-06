@@ -52,17 +52,6 @@ source start.bash
 ```
 
 - News:
-```js
-// Schema
-
-{
-  id: str // The new provider id
-  name: str, // The name of the news provider
-  url: str, // The url to site
-}
-```
-
-- NewsResponse:
 
 ```js
 // Schema
@@ -86,10 +75,14 @@ Body: { id: str, news_name: str }
 Returns:
 - Status: 201
 - Type: Application/json
-- Value: {
-    "error": false,
-    "message": "Suscribed"
+- Value:
+
+```js
+{
+  "error": false,
+  "message": "Suscribed"
 }
+```
 
 > metjod: DELETE -- path: /users
 
@@ -98,10 +91,14 @@ Body: { id: str, news_name: str }
 Returns:
 - Status: 200
 - Type: Application/json
-- Value: {
-    "error": false,
-    "message": "Unsuscribed"
+- Value: 
+
+```js
+{
+  "error": false,
+  "message": "Unsuscribed"
 }
+```
 
 > method: POST -- path: /useres/signup
 
@@ -110,10 +107,13 @@ Body: { name: str, email: str, password:str }
 Returns:
 - Status: 201
 - Type: Application/json
-- Value: {
-    "error": false,
-    "message": "User created"
+- Value: 
+```js
+{
+  "error": false,
+  "message": "User created"
 }
+```
 
 > method: POST -- path: /usres/login
 
@@ -122,28 +122,45 @@ Body: { User schema }
 Returns:
 - Status: 201
 - Type: Application/json
-- Value: {
-    "data": {
-      "token": str, // jwt
-      "user": {
-          "name": str,
-          "subscriptions": [str]
-      }
-    },
-    "error": false,
-    "message": "Logged"
+- Value: 
+
+```js
+{
+  "data": {
+    "token": str, // jwt
+    "user": {
+      "name": str,
+      "subscriptions": [str]
+    }
+  },
+  "error": false,
+  "message": "Logged"
 }
+```
 
 **News**
 
-> method: GET -- path: /news
+> method: GET -- path: /news?news_name=valid_news_name
 
 Description: Retrieve the news info
-Body: { url: url-to-news-provider }
+query - valid_news_name: str
 Returns:
 - Status: 200
 - Type: Application/json
-- Value: { NewsResponse schema }
+- Value: {
+
+```js
+{
+  "data": {
+    "abstract": str,
+    "title": str,
+    "url": str,
+    "url_image": str
+  },
+  "error": false,
+  "message": "News Retrieved"
+}
+```
 
 **Complete documentation** 
 Go to [docs](https://...)
