@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify, Response
 from uuid import uuid4
 from typing import List
 import app.users.auth as auth
+from jwt.exceptions import InvalidSignatureError, DecodeError
 import jwt
 
 # Blueprint implementation
@@ -31,7 +32,7 @@ def users_subscription():
     params:
     in: body
     - id: str, The user id
-    - news_id: str, The new id identifier
+    - news_name: str, The new name identifier
     
     DELETE: Remove a subscription to the user subscriptions list
     params:
@@ -44,26 +45,27 @@ def users_subscription():
         bearer = request.headers.get('Authorization')
         json_web_token = bearer.split(' ')[1]
         valid_token = auth.verify(json_web_token)
-    except (jwt.exceptions.InvalidSignatureError, jwt.exceptions.DecodeError):
-        return make_response(error=True, message='Unauthorized', status=401)
 
-    # Make sure the body has the correct schema
-    body = request.get_json()
-    try:
+        # Make sure the body has the correct schema by try
+        body = request.get_json()
         user_id = body['id']
         news_name = body['news_name']
-    except (KeyError, TypeError):
-        message = 'id and news_name are needed'
-        return make_response(error=True, message=message, status=400)
 
-    # Make the operation acording to the method
-    try:
+        # Make the operation acording to the method
         if request.method == 'POST':
             # result = db.add_new_to_user(user_id, news_name)
             return make_response(error=False, message='Suscribed', status=201)
         else:
             # result = db.remove_new_to_user(user_id, news_name)
             return make_response(error=False, message='Unsuscribed', status=200)
+
+    except (InvalidSignatureError, DecodeError, AttributeError):
+        return make_response(error=True, message='Unauthorized', status=401)
+
+    except (KeyError, TypeError):
+        message = 'id and news_name are needed'
+        return make_response(error=True, message=message, status=400)
+        
     except Exception:
         # Return a 500 error if something went wrong
         return make_response(error=True, message='Server serror', status=500)
@@ -96,9 +98,10 @@ def signup():
 
     # Create the user
     try:
-        # result = db.create_user(name, email, password)
+        id = uuid4()
+        # result = db.create_user(id, name, email, password)
         return make_response(error=False, message='User created', status=201)
-    except e:
+    except Exception:
         # Return a 500 error if something went wrong
         return make_response(error=True, message='Server serror', status=500)
 
@@ -127,7 +130,7 @@ def login():
     # Login the user and generate jwt
     try:
         # user = db.login(mail, password)
-        user = { 'name': 'Test', 'subscriptions': ['el_universal', 'excelsior'] }
+        user = { 'name': 'Stan', 'subscriptions': ['el_universal', 'excelsior'] }
         if user is not None:
             token = auth.encode(user)
             data= { 'token': token, 'user': user}
