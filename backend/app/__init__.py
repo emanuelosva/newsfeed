@@ -18,4 +18,7 @@ def create_app():
     from .users import api
     app.register_blueprint(api.bp)
 
+    from .firebase import fb_auth
+    app.register_blueprint(fb_auth)
+
     return app
