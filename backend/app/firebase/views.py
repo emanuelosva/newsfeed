@@ -4,11 +4,15 @@ from . import auth
 #flask
 from flask import render_template, request, redirect, url_for
 #Models
-from .models import User
+from .models import User, UserData
 #firebase exceptions
 from firebase_admin.auth import EmailAlreadyExistsError
 #Forms
 from .forms import SignupForms
+#password hash
+from werkzeug.security import generate_password_hash
+#Firebase services
+from .firestore_service import user_add
 
 bp = auth.bp
 
@@ -20,14 +24,9 @@ def signup():
         email = request.form['email']
         password = request.form['password']
 
-        try:
-            user = User(username, email, password)
-            user.create_user()
-            return redirect(url_for('auth.login'))
-        except EmailAlreadyExistsError:
-            error = 'El usuario ya está registrado, por favor verifique sus datos'
-            return render_template('signup.html', error=error)
-    return render_template('signup.html')
+        password_hash = generate_password_hash(password)
+        user_data = UserData(username, password_hash)
+        user_add(user_data)
 
 
 @bp.route('login', methods=['POST', 'GET'])
