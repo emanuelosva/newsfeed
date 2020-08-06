@@ -11,7 +11,7 @@ The api works with json-web-token authentication to access to routes and firebas
 ### Specifications
 - The user can make sigup and storage his/her data
 - The user can make login and acces to his/her data
-- The user can subscribe to many news chanels
+- The user can subscribe to any news chanels
 - The user can unsuscribe to any news chanel
 - The api must send the info of the user to the client
 - The api must send the principal 3 news of each chanel to wich the user is subscribed
@@ -79,15 +79,6 @@ source start.bash
 
 **Users**
 
-> method: GET -- path: /users/:user_id
-
-Description: Retrieve the user info
-Body: ***none***
-Returns:
-- Status: 200
-- Type: Application/json
-- Value: { User schema } // Without password
-
 > metjod: POST -- path: /usres/:user_id
 
 Description: Add a news subscription to user subscriptions list
@@ -122,7 +113,7 @@ Body: { User schema }
 Returns:
 - Status: 201
 - Type: Application/json
-- Value: { operation: 'sucessfull' }
+- Value: { token: 'json-web-token', User schema }
 
 **News**
 
