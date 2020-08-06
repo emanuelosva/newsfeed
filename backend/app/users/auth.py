@@ -1,8 +1,17 @@
 """Json web token auth funtions"""
 
+# Required imports
 import jwt
+import os
+from dotenv import load_dotenv
 
-SECRET = 'secret_dev'
+
+# Load env variables
+load_dotenv()
+SECRET = os.getenv('SECRET') or 'dev'
+
+
+# ------------------------- JWT manage ----------------------#
 
 def encode(payload):
     """
@@ -14,6 +23,7 @@ def encode(payload):
     """
     encoded = jwt.encode(payload, SECRET, algorithm='HS256')
     return encoded.decode()
+
 
 def verify(token):
     """

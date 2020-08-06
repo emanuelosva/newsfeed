@@ -1,3 +1,4 @@
+autopep8==1.5.4
 CacheControl==0.12.6
 cachetools==4.1.1
 certifi==2020.6.20
@@ -27,12 +28,15 @@ msgpack==1.0.0
 protobuf==3.12.4
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
+pycodestyle==2.6.0
 pycparser==2.20
 PyJWT==1.7.1
+python-dotenv==0.14.0
 pytz==2020.1
 requests==2.24.0
 rsa==4.6
 six==1.15.0
+toml==0.10.1
 uritemplate==3.0.1
 urllib3==1.25.10
 Werkzeug==1.0.1

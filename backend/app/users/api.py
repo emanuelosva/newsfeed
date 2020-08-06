@@ -10,7 +10,7 @@ from jwt.exceptions import InvalidSignatureError, DecodeError
 bp = Blueprint('users', __name__, url_prefix='/users')
 
 
-# Useful function
+# Response function
 def make_response(error: bool, message: str, status: int, data={}):
     """
     Create a homogenized response
