@@ -17,8 +17,9 @@ class User():
 
     def create_user(self):
         firebase_admin.auth.create_user(
-            email=self.email, 
-            password=self.password, 
-            username=self.username
+            display_name = self.username,
+            email = self.email, 
+            password= self.password,
+            email_verified = False 
         )
         
