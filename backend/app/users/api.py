@@ -43,7 +43,6 @@ def users_subscription():
     try:
         bearer = request.headers.get('Authorization')
         json_web_token = bearer.split(' ')[1]
-        print(json_web_token)
         valid_token = auth.verify(json_web_token)
     except (jwt.exceptions.InvalidSignatureError, jwt.exceptions.DecodeError):
         return make_response(error=True, message='Unauthorized', status=401)
