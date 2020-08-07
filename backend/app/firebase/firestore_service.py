@@ -22,3 +22,8 @@ def user_add(user_data):
 def get_user_by_email(user_email):
     """get user by UID from database"""
     return db.collection('users').document(user_email).get()
+
+
+def add_news_site(user_id, news_site_name):
+    news_collection = db.collection('users').document(user_id).collection('news_sites')
+    news_collection.add({'news_site_name':news_site_name})
