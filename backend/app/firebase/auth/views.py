@@ -1,6 +1,6 @@
 """file of views of firebase integrations services"""
 # #Blueprints
-from . import auth, feed
+from . import auth
 #flask
 from flask import render_template, request, redirect, url_for, flash, make_response, session
 from flask_login import login_required, login_user, logout_user
@@ -16,7 +16,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from .firestore_service import user_add, get_user_by_email
 
 bp = auth.bp
-feed = feed.feed
+
 
 @bp.route('/')
 def index():
@@ -73,20 +73,6 @@ def login():
             flash('El usuario no existe, verifique su correo')
 
     return render_template('login.html')
-
-
-
-@feed.route('/', methods=['POST', 'GET'])
-@login_required
-def feed():
-    if request.method == 'POST':
-        user_ip = session.get('user_ip')
-        username = current_user.id
-
-        context = {
-            'user_ip':user_ip,
-        }
-    return render_template('feed.html')
 
 
 @bp.route('/logout/')
