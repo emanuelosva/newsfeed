@@ -2,10 +2,10 @@
 # #Blueprints
 from . import auth
 #flask
-from flask import render_template, request, redirect, url_for, flash
-from flask_login import login_required
+from flask import render_template, request, redirect, url_for, flash, make_response, session
+from flask_login import login_required, login_user
 #Models
-from .models import UserData
+from .models import UserData, UserModel
 #firebase exceptions
 from firebase_admin.auth import EmailAlreadyExistsError
 #Forms
@@ -17,7 +17,17 @@ from .firestore_service import user_add, get_user_by_email
 
 bp = auth.bp
 
-@bp.route('signup/', methods=['POST', 'GET'])
+
+@bp.route('/')
+def index():
+    user_ip = request.remote_addr
+
+    response = make_response(redirect('/feed'))
+    session['user_ip'] = user_ip
+
+    return response
+
+@bp.route('/signup', methods=['POST', 'GET'])
 def signup():
     """Logic for input and send data for create new user"""
     if request.method == 'POST':
@@ -45,23 +55,35 @@ def login():
         password = request.form['password']
 
         user_validate = get_user_by_email(email)
-        if user_validate is not None:
+        if user_validate.to_dict() is not None:
             password_from_db = user_validate.to_dict()['password']
             check_password = check_password_hash(password_from_db, password)
             if check_password:
+                username = user_validate.to_dict()['username']
+                user_data = UserData(username, password, email)
+                user = UserModel(user_data)
+
+                login_user(user)
+
                 return redirect(url_for('auth.feed'))
             else:
                 error = 'Contraseña o nombre de usuario incorrectos'
                 return render_template('login.html', error=error)
         else:
-            error = 'El usuario no existe, verifique su correo'
-            return render_template('login.html', error)
+            flash('El usuario no existe, verifique su correo')
 
     return render_template('login.html')
 
 
 
-@bp.route('feed/', methods=['POST', 'GET'])
+@bp.route('/feed/', methods=['POST', 'GET'])
 @login_required
 def feed():
+    if request.method == 'POST':
+        user_ip = session.get('user_ip')
+        username = current_user.id
+
+        context = {
+            'user_ip':user_ip,
+        }
     return render_template('feed.html')
