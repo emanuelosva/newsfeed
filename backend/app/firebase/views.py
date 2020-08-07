@@ -1,6 +1,6 @@
 """file of views of firebase integrations services"""
 # #Blueprints
-from . import auth
+from . import auth, feed
 #flask
 from flask import render_template, request, redirect, url_for, flash, make_response, session
 from flask_login import login_required, login_user, logout_user
@@ -16,7 +16,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from .firestore_service import user_add, get_user_by_email
 
 bp = auth.bp
-
+feed = feed.feed
 
 @bp.route('/')
 def index():
@@ -65,7 +65,7 @@ def login():
 
                 login_user(user)
 
-                return redirect(url_for('auth.feed'))
+                return redirect(url_for('feed'))
             else:
                 error = 'Contraseña o nombre de usuario incorrectos'
                 return render_template('login.html', error=error)
@@ -76,7 +76,7 @@ def login():
 
 
 
-@bp.route('/feed/', methods=['POST', 'GET'])
+@feed.route('/', methods=['POST', 'GET'])
 @login_required
 def feed():
     if request.method == 'POST':
