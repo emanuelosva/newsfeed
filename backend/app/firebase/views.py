@@ -3,7 +3,7 @@
 from . import auth
 #flask
 from flask import render_template, request, redirect, url_for, flash, make_response, session
-from flask_login import login_required, login_user
+from flask_login import login_required, login_user, logout_user
 #Models
 from .models import UserData, UserModel
 #firebase exceptions
@@ -87,3 +87,11 @@ def feed():
             'user_ip':user_ip,
         }
     return render_template('feed.html')
+
+
+@bp.route('/logout/')
+@login_required
+def logout():
+    logout_user()
+    
+    return redirect(url_for('auth.login'))
