@@ -26,7 +26,7 @@ def add_news():
         email = current_user.id
         news_site_name = request.form['news_site_name']
         add_news_site(email, news_site_name)
-        flash(f'Se agregado {news_site_name} a su lista de favoritos')
+        flash(f'Se ha agregado {news_site_name} a su lista de favoritos')
     return redirect(url_for('feed'))
 
 
