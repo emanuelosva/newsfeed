@@ -18,4 +18,4 @@ def user_add(user_data):
 
 def get_user(user_id):
     """get user by UID from database"""
-    return db.collection('users').doument(user_id).get()
+    return db.collection('users').document(user_id).get()

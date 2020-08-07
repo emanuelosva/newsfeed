@@ -2,7 +2,7 @@
 # #Blueprints
 from . import auth
 #flask
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
 #Models
 from .models import UserData
 #firebase exceptions
@@ -12,7 +12,7 @@ from .forms import SignupForms
 #password hash
 from werkzeug.security import generate_password_hash
 #Firebase services
-from .firestore_service import user_add
+from .firestore_service import user_add, get_user
 
 bp = auth.bp
 
@@ -24,9 +24,14 @@ def signup():
         email = request.form['email']
         password = request.form['password']
 
-        password_hash = generate_password_hash(password)
-        user_data = UserData(username, password_hash)
-        user_add(user_data)
+        user_validate = get_user(username)
+        if user_validate.to_dict() is None:
+            password_hash = generate_password_hash(password)
+            user_data = UserData(username, password_hash, email)
+            user_add(user_data)
+            return redirect(url_for('auth.login'))
+        else:
+            flash('El usuario ya existe. \n Por favor valide la información')
     
     return render_template('signup.html')
 
