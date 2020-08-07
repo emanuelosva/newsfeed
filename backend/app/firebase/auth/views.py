@@ -1,33 +1,30 @@
 """file of views of firebase integrations services"""
 # #Blueprints
-from . import auth
+from . import bp
 #flask
 from flask import render_template, request, redirect, url_for, flash, make_response, session
 from flask_login import login_required, login_user, logout_user
 #Models
-from .models import UserData, UserModel
-#firebase exceptions
-from firebase_admin.auth import EmailAlreadyExistsError
+from app.firebase.models import UserData, UserModel
 #Forms
-from .forms import SignupForms
+from app.firebase.forms import SignupForms
 #password hash
 from werkzeug.security import generate_password_hash, check_password_hash
 #Firebase services
-from .firestore_service import user_add, get_user_by_email
+from app.firebase.firestore_service import user_add, get_user_by_email
 
-bp = auth.bp
 
 
 @bp.route('/')
 def index():
     user_ip = request.remote_addr
 
-    response = make_response(redirect('/feed'))
+    response = make_response(redirect('/signup'))
     session['user_ip'] = user_ip
 
     return response
 
-@bp.route('/signup', methods=['POST', 'GET'])
+@bp.route('/signup/', methods=['POST', 'GET'])
 def signup():
     """Logic for input and send data for create new user"""
     if request.method == 'POST':
@@ -48,7 +45,7 @@ def signup():
     return render_template('signup.html')
 
 
-@bp.route('login/', methods=['POST', 'GET'])
+@bp.route('/login/', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
         email = request.form['email']
@@ -65,7 +62,7 @@ def login():
 
                 login_user(user)
 
-                return redirect(url_for('feed'))
+                return redirect(url_for('feed.feed'))
             else:
                 error = 'Contraseña o nombre de usuario incorrectos'
                 return render_template('login.html', error=error)

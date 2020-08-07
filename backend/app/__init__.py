@@ -36,6 +36,6 @@ def create_app():
     app.register_blueprint(auth.bp)
 
     from .firebase import feed
-    app.register_blueprint(feed.feed)
+    app.register_blueprint(feed.bp)
 
     return app
