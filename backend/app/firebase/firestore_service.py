@@ -25,14 +25,13 @@ def get_user_by_email(user_email):
     return db.collection('users').document(user_email).get()
 
 
-def add_news_site(user_id, news_site_name):
+def add_news_site(user_id, news_name):
     news_sites = db.collection('users').document(user_id).news_sites
     news_sites.add(news_site_name)
 
 
-def delete_news_site(user_id, news_site_name):
+def delete_news_site(user_id, news_name):
     news_sites = db.collection('users').document(user_id).news_sites
-    
     for news_site in news_sites:
-        if news_site == news_site_name:
+        if news_site == news_name:
             news_site.delete()
