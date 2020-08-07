@@ -152,10 +152,16 @@ Returns:
 ```js
 {
   "data": {
-    "abstract": str,
-    "title": str,
-    "url": str,
-    "url_image": str
+    "copywrigt": "The info and it rigths belogns to https://www.nytimes.com",
+    "info": [
+      {
+        "summary": str,
+        "title": str,
+        "link_article": str,
+        "link_image": str
+      },
+      ...
+  ],
   },
   "error": false,
   "message": "News Retrieved"

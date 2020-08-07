@@ -3,6 +3,7 @@
 # Required imports
 from flask import Blueprint, request, jsonify
 from app.users.api import make_response
+from scrapy.scraping import get_news, news_providers
 
 # Blueprint instance
 bp = Blueprint('news', __name__, url_prefix='/news')
@@ -26,17 +27,15 @@ def get_news_info():
         # Get query
         news_name = request.args.get('news_name')
         if news_name:
-            # news_info = scrapy.get_new(news_name)
-            news_info = {
-                'title': 'Tony Stark missing',
-                'abstract': 'After the battle with Thanos, Iroman is missing',
-                'url_image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRBcbMGm0cyWxX_SzYle0fV13mhmMmWS3_ZBg&usqp=CAU',
-                'url': 'https://daily-buggle.com/breaking-news/tony-missing'
-            }
+            news_info = get_news(news_name)
             if not news_info:
                 return make_response(error=True, message='Not Found', status=404)
             else:
-                return make_response(error=False, message='News Retrieved', status=200, data=news_info)
+                data = {
+                    'info': news_info,
+                    'copywrigt': f'The info and it rigths belogns to {news_providers[news_name]}'
+                }
+                return make_response(error=False, message='News Retrieved', status=200, data=data)
         else:
             raise KeyError
 
