@@ -4,7 +4,7 @@ from . import auth
 #flask
 from flask import render_template, request, redirect, url_for
 #Models
-from .models import User, UserData
+from .models import UserData
 #firebase exceptions
 from firebase_admin.auth import EmailAlreadyExistsError
 #Forms
@@ -27,6 +27,8 @@ def signup():
         password_hash = generate_password_hash(password)
         user_data = UserData(username, password_hash)
         user_add(user_data)
+    
+    return render_template('signup.html')
 
 
 @bp.route('login', methods=['POST', 'GET'])
