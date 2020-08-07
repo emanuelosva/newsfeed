@@ -4,5 +4,7 @@ from flask import Blueprint
 
 feed = ('feed', __name__, url_prefix='/')
 
+from . import views
+
 
 
