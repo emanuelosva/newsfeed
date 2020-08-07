@@ -48,6 +48,9 @@ def users_subscription():
         bearer = request.headers.get('Authorization')
         json_web_token = bearer.split(' ')[1]
         valid_token = auth.verify(json_web_token)
+        # exist = db.find_user(valid_token.username)
+        # if not exist:
+        #     return make_response(error=True, message='Unauthorized', status=401)
 
         # Data from body
         body = request.get_json()
