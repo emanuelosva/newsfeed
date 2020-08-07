@@ -51,9 +51,11 @@ def login():
             if check_password:
                 return redirect(url_for('auth.feed'))
             else:
-                flash('Contraseña o nombre de usuario incorrectos')
+                error = 'Contraseña o nombre de usuario incorrectos'
+                return render_template('login.html', error=error)
         else:
-            flash('El usuario no existe, verifique su correo')
+            error = 'El usuario no existe, verifique su correo'
+            return render_template('login.html', error)
 
     return render_template('login.html')
 
