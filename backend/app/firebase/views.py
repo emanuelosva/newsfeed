@@ -3,6 +3,7 @@
 from . import auth
 #flask
 from flask import render_template, request, redirect, url_for, flash
+from flask_login import login_required
 #Models
 from .models import UserData
 #firebase exceptions
@@ -37,7 +38,7 @@ def signup():
     return render_template('signup.html')
 
 
-@bp.route('login', methods=['POST', 'GET'])
+@bp.route('login/', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
         email = request.form['email']
@@ -55,3 +56,10 @@ def login():
             flash('El usuario no existe, verifique su correo')
 
     return render_template('login.html')
+
+
+
+@bp.route('feed/', methods=['POST', 'GET'])
+@login_required
+def feed():
+    return render_template('feed.html')
