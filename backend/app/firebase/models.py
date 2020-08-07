@@ -25,6 +25,6 @@ class UserModel(UserMixin):
         user_data = UserData(
             email = user_validation.id,
             username = user_validation.to_dict()['username'],
-            password = user_validation.to_dict()['password']
+            password = user_validation.to_dict()['password'],
         )
         return UserModel(user_data)
