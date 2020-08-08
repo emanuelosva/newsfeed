@@ -21,7 +21,11 @@ def signup(username: str, email: str, password: str):
     # User existing validation
     if user_validate.to_dict() is None:
         password_hash = generate_password_hash(password)
-        user_data = UserData(username, password_hash, email)
+        user_data = {
+            "username": username,
+            "password_hash": password_hash,
+            "email": email
+        }
         user_add(user_data)
         return False
     else:

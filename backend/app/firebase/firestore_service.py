@@ -1,21 +1,25 @@
-"""Its file for integrate services of firebase"""
+"""Firebase connection and db methods"""
 
+# Required imports
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 from google.cloud import storage
 
+# Get firebase client and db
 storage_client = storage.Client()
 default_app = firebase_admin.initialize_app()
-
 db = firestore.client()
+
+
+# ------------------------- Db methods ---------------------------#
 
 def user_add(user_data):
     """Add new user to database"""
-    user = db.collection('users').document(user_data.email)
+    user = db.collection('users').document(user_data["email"])
     user.set({
-        'username':user_data.username,
-        'password':user_data.password,
+        'username': user_data["username"],
+        'password': user_data["password"],
         'news_sites': []
     })
 
