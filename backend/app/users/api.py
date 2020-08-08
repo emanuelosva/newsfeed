@@ -5,8 +5,8 @@ from uuid import uuid4
 from typing import List
 import app.users.auth as auth
 from jwt.exceptions import InvalidSignatureError, DecodeError
-from app.firebase.firestore_service import add_news_site, delete_news_site, get_user_by_email
-from app.firebase.auth.controller import login, signup
+# from app.firebase.firestore_service import add_news_site, delete_news_site, get_user_by_email
+# from app.firebase.auth.controller import login, signup
 
 # Blueprint implementation
 bp = Blueprint('users', __name__, url_prefix='/users')
@@ -103,7 +103,7 @@ def signup():
         password = body['password']
 
         # Create the user
-        # existing_user = signup(username, email, password)
+        #existing_user = signup(username, email, password)
         if existing_user:
             return make_response(error=True, message='User already exist', status=400)
         return make_response(error=False, message='User created', status=201)
@@ -113,9 +113,9 @@ def signup():
         message = 'name, email and password are needed'
         return make_response(error=True, message=message, status=400)
 
-    except Exception:
-        # Return a 500 error if something went wrong
-        return make_response(error=True, message='Server serror', status=500)
+    # except Exception:
+    #     # Return a 500 error if something went wrong
+    #     return make_response(error=True, message='Server serror', status=500)
 
 
 @bp.route('/login', methods=['POST'])
