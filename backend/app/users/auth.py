@@ -1,4 +1,4 @@
-"""Json web token auth funtions"""
+"""Json web token auth functions"""
 
 # Required imports
 import jwt
