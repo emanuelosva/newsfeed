@@ -96,7 +96,7 @@ def signup():
     try:
         # Get data from body
         body = request.get_json()
-        name = body['name']
+        name = body['username']
         email = body['email']
         password = body['password']
 
@@ -107,7 +107,7 @@ def signup():
 
     except (KeyError, TypeError):
         # If invalid body schema
-        message = 'name, email and password are needed'
+        message = 'username, email and password are needed'
         return make_response(error=True, message=message, status=400)
 
     except Exception:
