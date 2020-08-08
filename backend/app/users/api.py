@@ -5,6 +5,8 @@ from uuid import uuid4
 from typing import List
 import app.users.auth as auth
 from jwt.exceptions import InvalidSignatureError, DecodeError
+from app.firebase.auth import controller as auth_controller
+from app.firebase.firestore_service import add_news_site, delete_news_site
 
 # Blueprint implementation
 bp = Blueprint('users', __name__, url_prefix='/users')
@@ -54,14 +56,20 @@ def users_subscription():
 
         # Data from body
         body = request.get_json()
-        user_id = body['id']
+        user_id = body['email']
         news_name = body['news_name']
 
+        if not (news_name == 'el_universal' or news_name == 'bbc' or news_name == 'new_york_times'):
+            return make_response(error=True, message='Invalid news name', status=409)
+
         if request.method == 'POST':
-            # result = db.add_new_to_user(user_id, news_name)
+            add_news_site(user_id, news_name)
             return make_response(error=False, message='Suscribed', status=201)
         else:
-            # result = db.remove_new_to_user(user_id, news_name)
+            exist_subscription = delete_news_site(user_id, news_name)
+            if exist_subscription:
+                message = f'The user is not subscribed to {news_name}'
+                return make_response(error=True, message=message, status=409)
             return make_response(error=False, message='Unsuscribed', status=200)
 
     except (InvalidSignatureError, DecodeError, AttributeError):
@@ -96,13 +104,14 @@ def signup():
     try:
         # Get data from body
         body = request.get_json()
-        name = body['username']
+        username = body['username']
         email = body['email']
         password = body['password']
 
         # Create the user
-        id = uuid4()
-        # result = db.create_user(id, name, email, password)
+        existing_user = auth_controller.signup(username, email, password)
+        if existing_user:
+            return make_response(error=True, message='The user already exist', status=409)
         return make_response(error=False, message='User created', status=201)
 
     except (KeyError, TypeError):
@@ -134,10 +143,7 @@ def login():
         password = body['password']
 
         # Login the user and generate jwt
-        # user = db.login(mail, password)
-        id = str(uuid4())
-        user = {'id': id, 'name': 'Stan',
-                'subscriptions': ['el_universal', 'excelsior']}
+        user = auth_controller.login(email, password)
         if user is not None:
             # The credentials are correct
             token = auth.encode(user)
