@@ -14,6 +14,7 @@
 instance/*
 !instance/.gitignore
 .webassets-cache
+.flaskenv
 
 ### Flask.Python Stack ###
 # Byte-compiled / optimized / DLL files
@@ -128,6 +129,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+Pipfile
+Pipfile.lock
 
 # Spyder project settings
 .spyderproject
@@ -157,3 +160,9 @@ dmypy.json
 # pipenv
 
 # End of https://www.toptal.com/developers/gitignore/api/flask,python,firebase
+
+# Firebase authentication
+newsfeed-master-afd51-firebase-adminsdk-r6f2z-970bae9b91.json
+
+#testing templates
+templates
