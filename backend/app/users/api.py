@@ -5,6 +5,8 @@ from uuid import uuid4
 from typing import List
 import app.users.auth as auth
 from jwt.exceptions import InvalidSignatureError, DecodeError
+from app.firebase.firestore_service import add_news_site, delete_news_site, get_user_by_email
+from app.firebase.auth.controller import login, signup
 
 # Blueprint implementation
 bp = Blueprint('users', __name__, url_prefix='/users')
@@ -48,8 +50,8 @@ def users_subscription():
         bearer = request.headers.get('Authorization')
         json_web_token = bearer.split(' ')[1]
         valid_token = auth.verify(json_web_token)
-        # exist = db.find_user(valid_token.username)
-        # if not exist:
+        # exist = get_user_by_email(valid_token.username)
+        # if exist.to_dict() is None:
         #     return make_response(error=True, message='Unauthorized', status=401)
 
         # Data from body
@@ -58,7 +60,6 @@ def users_subscription():
         news_name = body['news_name']
 
         if request.method == 'POST':
-            # from firebase.firestore_service import add_news_site, delete_news_site
             #add_news_site(user_id, news_name)
             return make_response(error=False, message='Suscribed', status=201)
         else:
@@ -102,7 +103,6 @@ def signup():
         password = body['password']
 
         # Create the user
-        # from firebase.auth.controller import signup, login
         # existing_user = signup(username, email, password)
         if existing_user:
             return make_response(error=True, message='User already exist', status=400)

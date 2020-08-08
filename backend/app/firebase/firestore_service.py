@@ -1,14 +1,13 @@
 """Firebase connection and db methods"""
 
 # Required imports
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
-from google.cloud import storage
+from firebase_admin import credentials, firestore, initialize_app
+#from google.cloud import storage
 
 # Get firebase client and db
+cred = credentials.Certificate('./key.json')
 storage_client = storage.Client()
-default_app = firebase_admin.initialize_app()
+default_app = initialize_app(cred)
 db = firestore.client()
 
 

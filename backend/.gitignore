@@ -163,6 +163,4 @@ dmypy.json
 
 # Firebase authentication
 newsfeed-master-afd51-firebase-adminsdk-r6f2z-970bae9b91.json
-
-#testing templates
-templates
+**/**/key.json
