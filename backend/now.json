@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "alias": "newsfeedapi",
+  "builds": [
+    {
+      "src": "*.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/.*",
+      "dest": "main.py"
+    }
+  ]
+}
