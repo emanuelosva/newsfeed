@@ -37,15 +37,17 @@ source start.bash
 
 ### API docs (Resume)
 
+**Interactive documentation** 
+Go to [docs](https://documenter.getpostman.com/view/11575536/T1LJkozg?version=latest)
+
 ##### Entities
 - User:
 ```js
 // Schema
 
 {
-  id: str, // The user id (index)
   email: str, // The user email (index)
-  name: str, // The user name
+  username: str, // The user name
   password: str, // The user password
   subscriptions: [News] // The user subscriptions
 }
@@ -57,10 +59,10 @@ source start.bash
 // Schema
 
 {
-  name: str, // The name of the new
-  abstract: str // Summary of new
-  url_image: str // The url to news portrait
-  url: str, // The url to site
+  title: str, // The name of the new
+  summary: str // Summary of new
+  link_image: str // The url to news portrait
+  link_article: str, // The url to site
 }
 ```
 
@@ -100,7 +102,7 @@ Returns:
 }
 ```
 
-> method: POST -- path: /useres/signup
+> method: POST -- path: /users/signup
 
 Description: Register a new user
 Body: { name: str, email: str, password:str }
@@ -115,7 +117,7 @@ Returns:
 }
 ```
 
-> method: POST -- path: /usres/login
+> method: POST -- path: /users/login
 
 Description: Login a user
 Body: { User schema }
@@ -130,6 +132,7 @@ Returns:
     "token": str, // jwt
     "user": {
       "name": str,
+      "password": "",
       "subscriptions": [str]
     }
   },
@@ -144,6 +147,10 @@ Returns:
 
 Description: Retrieve the news info
 query - valid_news_name: str
+valid_news_names:
+- bbc
+- el_universal
+- new_york_times
 Returns:
 - Status: 200
 - Type: Application/json
@@ -167,7 +174,3 @@ Returns:
   "message": "News Retrieved"
 }
 ```
-
-**Complete documentation** 
-Go to [docs](https://...)
-
