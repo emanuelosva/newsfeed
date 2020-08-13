@@ -1,6 +1,6 @@
 <style>
   .Home {
-    background-image: url(waves.svg);
+    background-image: url("waves.svg");
   }
 </style>
 
@@ -21,7 +21,7 @@
         <p>
           <a
             class="bg-orange-500 text-orange-100 px-12 py-4 rounded-md"
-            href="/register">
+            href="/signup">
             Get started for free
           </a>
         </p>

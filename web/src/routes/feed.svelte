@@ -1,6 +1,10 @@
 <script>
-
+  import Article from "../components/Article.svelte";
 </script>
+
+<svelte:head>
+  <title>Feed</title>
+</svelte:head>
 
 <div class="Feed App h-screen mx-auto grid grid-cols-12">
   <aside class="bg-gray-200 col-span-2">
@@ -13,11 +17,11 @@
         </li>
         <li>
           <i class="fa fa-chevron-down mr-2" />
-          <button>NYT</button>
+          <button>New York Times</button>
         </li>
         <li>
           <i class="fa fa-chevron-down mr-2" />
-          <button>ElUni</button>
+          <button>El Universal</button>
         </li>
       </ul>
       <p class="mt-4">
@@ -54,149 +58,10 @@
         placeholder="Search" />
     </section>
     <section class="grid grid-cols-2 lg:grid-cols-3 gap-6">
-      <article class="relative rounded border shadow-md overflow-hidden">
-        <a
-          href="https://www.nytimes.com/es/2020/08/10/espanol/cultura/jovita-idar-laredo-activista.html">
-          <figure class="object-cover">
-            <img
-              class="w-full"
-              src="https://static01.nyt.com/images/2020/08/10/obituaries/10Overlooked-Idar-ES-00/07overlooked-idar01-thumbWide.jpg?quality=75&auto=webp&disable=upscale"
-              alt="Jovita Idár, activista de los derechos de los
-              mexicoestadounidenses y las mujeres" />
-          </figure>
-          <span
-            class="absolute top-0 px-4 py-1 mt-4 bg-orange-400 bg-opacity-75
-            text-white text-xs">
-            BBC
-          </span>
-          <div class="p-4">
-            <h2 class="text-base font-bold leading-snug tracking-tight">
-              Jovita Idár, activista de los derechos de los
-              mexicoestadounidenses y las mujeres
-            </h2>
-            <hr class="w-10 border-t-4 border-orange-400 my-4" />
-            <p class="text-xs">
-              Como maestra, escritora y editora, Idár preservó la cultura
-              mexicana en el sur de Texas, promovió la igualdad de derechos de
-              las mujeres y las exhortó a estudiar y participar en la política.
-            </p>
-          </div>
-        </a>
-      </article>
-      <article class="relative rounded border shadow-md overflow-hidden">
-        <a
-          href="https://www.nytimes.com/es/2020/08/09/espanol/estilos-de-vida/amor-animales.html">
-          <figure class="object-cover">
-            <img
-              class="w-full"
-              src="https://static01.nyt.com/images/2020/08/02/fashion/02MODERN-FARM/02MODERN-FARM-thumbWide.jpg?quality=75&auto=webp&disable=upscale"
-              alt="Jovita Idár, activista de los derechos de los
-              mexicoestadounidenses y las mujeres" />
-          </figure>
-          <span
-            class="absolute top-0 px-4 py-1 mt-4 bg-orange-400 bg-opacity-75
-            text-white text-xs">
-            BBC
-          </span>
-          <div class="p-4">
-            <h2 class="text-base font-bold leading-snug tracking-tight">
-              Dediqué todo mi amor a los animales
-            </h2>
-            <hr class="w-10 border-t-4 border-orange-400 my-4" />
-            <p class="text-xs">
-              En una época difícil busqué consuelo en los caballos, las cabras e
-              incluso un osezno. La pandemia actual me condujo de nuevo hasta
-              ellos.
-            </p>
-          </div>
-        </a>
-      </article>
-      <article class="relative rounded border shadow-md overflow-hidden">
-        <a href="https://www.bbc.com/mundo/noticias-53723975">
-          <figure class="object-cover">
-            <img
-              class="w-full"
-              src="https://ichef.bbci.co.uk/live-experience/cps/320/cpsprodpb/183F6/production/_113881399_gettyimages-1212920586.jpg"
-              alt="Jovita Idár, activista de los derechos de los
-              mexicoestadounidenses y las mujeres" />
-          </figure>
-          <span
-            class="absolute top-0 px-4 py-1 mt-4 bg-orange-400 bg-opacity-75
-            text-white text-xs">
-            New York Times
-          </span>
-          <div class="p-4">
-            <h2 class="text-base font-bold leading-snug tracking-tight">
-              El mundo alcanza los 20 millones de casos de coronavirus: los
-              gráficos que muestran dónde se propaga más (y qué pasa en América
-              Latina)
-            </h2>
-            <hr class="w-10 border-t-4 border-orange-400 my-4" />
-            <p class="text-xs">
-              Casi cinco meses después de que se declaró la pandemia global, el
-              coronavirus continúa propagándose por el mundo. Estos gráficos y
-              mapas te explican cómo el virus se manifiesta en las diferentes
-              regiones del planeta.
-            </p>
-          </div>
-        </a>
-      </article>
-      <article class="relative rounded border shadow-md overflow-hidden">
-        <a href="https://www.bbc.com/mundo/noticias-internacional-53731824">
-          <figure class="object-cover">
-            <img
-              class="w-full"
-              src="https://ichef.bbci.co.uk/live-experience/cps/320/cpsprodpb/F9B8/production/_113882936_044c9764-8f2c-4152-be44-30175d3b8ebc.jpg"
-              alt="Jovita Idár, activista de los derechos de los
-              mexicoestadounidenses y las mujeres" />
-          </figure>
-          <span
-            class="absolute top-0 px-4 py-1 mt-4 bg-orange-400 bg-opacity-75
-            text-white text-xs">
-            New York Times
-          </span>
-          <div class="p-4">
-            <h2 class="text-base font-bold leading-snug tracking-tight">
-              Un herido en un tiroteo cerca de la Casa Blanca que obliga a Trump
-              a resguardarse durante unos minutos
-            </h2>
-            <hr class="w-10 border-t-4 border-orange-400 my-4" />
-            <p class="text-xs">
-              El presidente de Estados Unidos, Donald Trump, interrumpió su
-              presencia diaria ante los medios de forma abrupta y luego regresó
-              y explicó lo sucedido.
-            </p>
-          </div>
-        </a>
-      </article>
-      <article class="relative rounded border shadow-md overflow-hidden">
-        <a
-          href="https://www.eluniversal.com.mx/nacion/giran-orden-de-aprehension-contra-jesus-orta-ex-jefe-de-policia-en-cdmx-por-delincuencia">
-          <figure class="object-cover">
-            <img
-              class="w-full"
-              src="https://www.eluniversal.com.mx/sites/default/files/2020/08/10/_fgr_jesus_orta.jpg"
-              alt="Jovita Idár, activista de los derechos de los
-              mexicoestadounidenses y las mujeres" />
-          </figure>
-          <span
-            class="absolute top-0 px-4 py-1 mt-4 bg-orange-400 bg-opacity-75
-            text-white text-xs">
-            El Universal
-          </span>
-          <div class="p-4">
-            <h2 class="text-base font-bold leading-snug tracking-tight">
-              Giran orden de aprehensión contra Jesús Orta, ex jefe de policía
-              en CDMX, por delincuencia organizada
-            </h2>
-            <hr class="w-10 border-t-4 border-orange-400 my-4" />
-            <p class="text-xs">
-              Este sábado EL UNIVERSAL publicó que la FGR había pedido girar las
-              órdenes de aprehensión relacionadas con desvíos millonarios.
-            </p>
-          </div>
-        </a>
-      </article>
+      <Article />
+      <Article />
+      <Article />
+      <Article />
     </section>
   </main>
 </div>

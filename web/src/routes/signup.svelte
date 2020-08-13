@@ -2,6 +2,10 @@
 
 </script>
 
+<svelte:head>
+  <title>Signup</title>
+</svelte:head>
+
 <div class="App h-screen mx-auto grid grid-cols-12">
   <aside
     class="hidden md:block md:col-span-4 bg-cover bg-center"

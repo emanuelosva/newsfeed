@@ -1,5 +1,5 @@
 <script>
-
+  let name = "Dummy";
 </script>
 
 <header class="container mx-auto">

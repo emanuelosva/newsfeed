@@ -45,6 +45,10 @@
   }
 </style>
 
+<svelte:head>
+  <title>Profile</title>
+</svelte:head>
+
 <div class="Profile App h-screen mx-auto grid grid-cols-12">
   <aside class="bg-gray-200 col-span-2">
     <div class="h-screen sticky top-0 px-8 py-16">
