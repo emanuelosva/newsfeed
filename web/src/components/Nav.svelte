@@ -6,6 +6,7 @@
   const logout = async () => {
     const { data } = await serverRequest("/server/logout", "POST");
     user.reset();
+    window.sessionStorage.setItem("email", "");
     await goto("/");
   };
 </script>

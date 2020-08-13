@@ -5,7 +5,7 @@
 
 <aside class="Menu bg-gray-200 col-span-2">
   <div class="h-screen sticky top-0 px-8 py-16">
-    <a class="font-bold uppercase" href="/profile" rel="prefetch">Profile</a>
+    <a class="font-bold uppercase" href="profile" rel="prefetch">Profile</a>
     <br />
     <br />
     <h3 class="font-bold uppercase">Feeds</h3>
@@ -20,11 +20,9 @@
       {/each}
     </ul>
     <p class="mt-4">
-      <button
-        class="font-semibold text-orange-500 border border-orange-500 px-8 py-1
-        rounded-md hover:bg-orange-500 hover:text-orange-100">
-        Add a news provider
-      </button>
+      <a href="profile" class="font-semibold text-orange-500 ">
+        Update your news providers
+      </a>
     </p>
   </div>
 </aside>

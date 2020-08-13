@@ -1,5 +1,50 @@
 <script>
-  let name = "Dummy";
+  import { user } from "../store/user";
+  import { goto } from "@sapper/app";
+  import { serverRequest, apiError } from "../utils/apiRequest";
+
+  let name = user.username || "Stan Lee";
+  let subscriptions = [
+    { name: "El universal", key: "el_universal" },
+    { name: "BBC", key: "bbc" },
+    { name: "The New York Times", key: "new_york_times" },
+  ];
+
+  let statusMessage;
+
+  const subscribe = async (name) => {
+    try {
+      const email = window.sessionStorage.getItem("email");
+      const body = { email, news_name: name };
+      const { data, status } = await serverRequest(
+        "/server/subscribe",
+        "POST",
+        body
+      );
+      user.addNews(name);
+      statusMessage = "Success - Go to your feed";
+      await goto("/profile#subscriptions");
+    } catch (error) {
+      statusMessage = apiError(error);
+    }
+  };
+
+  const unsubscribe = async (name) => {
+    try {
+      const email = window.sessionStorage.getItem("email");
+      const body = { email, news_name: name };
+      const { data, status } = await serverRequest(
+        "/server/unsubscribe",
+        "DELETE",
+        body
+      );
+      user.removeNews(name);
+      statusMessage = "Success - Unsubscribed";
+      await goto("/profile#subscriptions");
+    } catch (error) {
+      statusMessage = apiError(error);
+    }
+  };
 </script>
 
 <svelte:head>
@@ -9,7 +54,7 @@
 <div class="Profile App h-screen mx-auto grid grid-cols-12">
   <aside class="bg-gray-200 col-span-2">
     <div class="h-screen sticky top-0 px-8 py-16">
-      <h3 class="font-bold uppercase">Feeds</h3>
+      <h3 class="font-bold uppercase">News Providers</h3>
       <ul class="leading-10">
         <li>
           <i class="fa fa-chevron-down mr-2" />
@@ -41,7 +86,12 @@
         </li>
       </ul>
       <p class="mt-4">
-        <a href="/feed">Create New Feed</a>
+        <a
+          class="font-semibold text-orange-500 uppercase"
+          href="/feed"
+          rel="prefetch">
+          Go to your feed
+        </a>
       </p>
     </div>
   </aside>
@@ -102,7 +152,7 @@
             type="text"
             class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none
             focus:shadow-outline text-gray-600 font-medium"
-            value="Israel" />
+            bidn:value={$user.username} />
         </div>
         <div class="mb-5">
           <label for="lastname" class="font-bold mb-1 text-gray-700 block">
@@ -128,7 +178,34 @@
       </section>
       <section>
         <div class="w-full">
-          <h3 class="text-2xl border-b">My suscriptions</h3>
+          <h3 class="font-bold mb-1 text-gray-700 block">My suscriptions</h3>
+          <p id="subscriptions">Get a new subscription</p>
+          {#if statusMessage}
+            <br />
+            <p class="font-semibold text-orange-500">{statusMessage}</p>
+          {/if}
+          <br />
+          {#each subscriptions as sub}
+            {#if $user.news_sites.includes(sub.key)}
+              <button
+                on:click={() => unsubscribe(sub.key)}
+                class="font-semibold text-orange-500 uppercase border block m-3
+                border-orange-500 px-8 py-2 rounded-md hover:bg-orange-500
+                hover:text-orange-100">
+                {sub.name} -
+                <span style="font-size: 10px;">Unsusbcribe</span>
+              </button>
+            {:else}
+              <button
+                on:click={() => subscribe(sub.key)}
+                class="font-semibold text-orange-500 uppercase border block m-3
+                border-green-500 px-8 py-2 rounded-md hover:bg-green-500
+                hover:text-orange-100">
+                {sub.name} -
+                <span style="font-size: 10px;">Add subscription</span>
+              </button>
+            {/if}
+          {/each}
         </div>
       </section>
     </div>

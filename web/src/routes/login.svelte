@@ -12,7 +12,8 @@
     const body = { email, password };
     try {
       const { data } = await serverRequest("/server/login", "POST", body);
-      user.update(data);
+      window.sessionStorage.setItem("email", email);
+      user.set(data);
       await goto("/feed");
     } catch (error) {
       statusMessage = apiError(error);

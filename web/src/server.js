@@ -55,6 +55,40 @@ server.post('/server/logout', (req, res) => {
   res.status(200).send('Logout')
 });
 
+// New subscription
+server.post('/server/subscribe', async (req, res) => {
+  const { body } = req;
+  try {
+    const { status, data } = await axios({
+      url: `${API}/users`,
+      headers: { Authorization: `Bearer ${req.session.token}` },
+      method: 'POST',
+      data: { ...body },
+    });
+
+    res.status(200).send('Subscrined');
+  } catch (error) {
+    res.status(error.response.status).send(error)
+  }
+});
+
+// New subscription
+server.delete('/server/unsubscribe', async (req, res) => {
+  const { body } = req;
+  try {
+    const { status, data } = await axios({
+      url: `${API}/users`,
+      headers: { Authorization: `Bearer ${req.session.token}` },
+      method: 'DELETE',
+      data: { ...body },
+    });
+
+    res.status(200).send('Unubscrined');
+  } catch (error) {
+    res.status(error.response.status).send(error)
+  }
+});
+
 // Static server
 server.use(compression({ threshold: 0 }));
 server.use(sirv('static', { dev }));
