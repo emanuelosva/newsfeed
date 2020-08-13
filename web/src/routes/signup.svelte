@@ -1,5 +1,27 @@
 <script>
+  import { apiRequest } from "../utils/apiRequest";
+  import { goto } from "@sapper/app";
+  let username;
+  let email;
+  let password;
 
+  let statusError;
+  let statusMessage;
+
+  const signup = async () => {
+    try {
+      const body = { username, email, password };
+      const { data, status } = await apiRequest("/users/signup", "POST", body);
+      await goto("/profile");
+    } catch (error) {
+      if (error.data) {
+        statusError = error.response.status;
+        statusMessage = error.data.message;
+      } else {
+        statusError = 500;
+      }
+    }
+  };
 </script>
 
 <svelte:head>
@@ -26,7 +48,8 @@
             text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="username"
             type="text"
-            placeholder="Full name" />
+            placeholder="Full name"
+            bind:value={username} />
         </div>
 
         <div class="mb-4">
@@ -38,7 +61,8 @@
             text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="email"
             type="email"
-            placeholder="email" />
+            placeholder="email"
+            bind:value={email} />
         </div>
 
         <div class="mb-6">
@@ -51,12 +75,14 @@
             focus:shadow-outline"
             id="password"
             type="password"
-            placeholder="******************" />
+            placeholder="******************"
+            bind:value={password} />
           <p class="text-blue-500 text-xs italic">Please choose a password.</p>
         </div>
 
         <div class="mx-auto block ">
           <button
+            on:click={signup}
             class="w-full bg-orange-400 hover:bg-blue-700 text-white font-bold
             py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="button">
