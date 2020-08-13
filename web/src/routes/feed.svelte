@@ -1,5 +1,18 @@
 <script>
   import Article from "../components/Article.svelte";
+  import { apiRequest, apiError } from "../utils/apiRequest";
+
+  let statusMessage;
+  let statusError;
+
+  const getNews = (newsName) => {
+    try {
+      const { data, status } = apiRequest(`/news?=news_name${newsName}`, "GET");
+    } catch (error) {
+      statusError = true;
+      statusMessage = apiError(error);
+    }
+  };
 </script>
 
 <svelte:head>

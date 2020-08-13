@@ -1,6 +1,31 @@
 <script>
+  import { goto } from "@sapper/app";
+  import { serverRequest, apiError } from "../utils/apiRequest";
+  import { user } from "../store/user";
 
+  let email;
+  let password;
+
+  let statusMessage;
+
+  const login = async () => {
+    const body = { email, password };
+    try {
+      const { data } = await serverRequest("/server/login", "POST", body);
+      user.update(data);
+      await goto("/feed");
+    } catch (error) {
+      statusMessage = apiError(error);
+    }
+  };
 </script>
+
+<style>
+  .errorLogin {
+    font-size: 16px;
+    color: brown;
+  }
+</style>
 
 <svelte:head>
   <title>Login</title>
@@ -29,16 +54,21 @@
         <hr class="my-10" />
       </div>
       <form action="">
+        {#if statusMessage}
+          <p class="errorLogin">{statusMessage}</p>
+        {/if}
         <div class="mb-4">
           <label
             class="block text-gray-700 text-sm font-bold mb-2"
             for="email" />
           <input
+            required
             class="h-12 shadow appearance-none border rounded w-full py-2 px-3
             text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="email"
             type="email"
-            placeholder="Username or email" />
+            placeholder="Username or email"
+            bind:value={email} />
         </div>
 
         <div class="mb-6">
@@ -46,12 +76,14 @@
             class="block text-gray-700 text-sm font-bold mb-2"
             for="password" />
           <input
+            required
             class="h-12 shadow appearance-none border border-orange-400 rounded
             w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none
             focus:shadow-outline"
             id="password"
             type="password"
-            placeholder="**********" />
+            placeholder="**********"
+            bind:value={password} />
           <p class="text-blue-500 text-xs">
             <a class="text-orange-500" href="/get-password">
               Forgot your password?
@@ -71,7 +103,8 @@
             class="w-1/2 text-center bg-orange-400 hover:bg-orange-700
             text-white font-bold py-3 px-4 rounded focus:outline-none
             focus:shadow-outline"
-            type="button">
+            type="button"
+            on:click={login}>
             Sign in
           </button>
         </div>
