@@ -13,14 +13,25 @@
 <header class="container mx-auto">
   <nav class="flex justify-between h-16 items-center">
     <h1 class="text-xl font-bold text-gray-800">
-      <a href="/">Newsfeed</a>
+      {#if $user.username}
+        <a href="/feed">Newsfeed</a>
+      {:else}
+        <a href="/">Newsfeed</a>
+      {/if}
     </h1>
     <ul class="flex">
       <li>
         {#if $user.username}
-          <p class="font-thin text-gray-500 mr-4">{$user.username}</p>
+          <a
+            href="/profile"
+            rel="prefetch"
+            class="font-thin text-gray-500 mr-4">
+            {$user.username}
+          </a>
         {:else}
-          <a class="font-thin text-gray-500 mr-4" href="/signup">Register</a>
+          <a class="font-thin text-gray-500 mr-4" href="/signup" rel="prefetch">
+            Register
+          </a>
         {/if}
       </li>
       <li>
@@ -37,7 +48,8 @@
             class="font-semibold text-orange-500 uppercase border
             border-orange-500 px-8 py-2 rounded-md hover:bg-orange-500
             hover:text-orange-100"
-            href="/login">
+            href="/login"
+            rel="prefetch">
             Login
           </a>
         {/if}
