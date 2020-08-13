@@ -23,8 +23,8 @@ server.use(express.urlencoded({ extended: true }));
 server.use(coockieSession({
   secure: !dev,
   httpOnly: !dev,
-  secret: process.env.SECRET_COCKIE || 'secret',
-  maxAge: 1000 * 60 * 60 * 24 * 5,
+  secret: process.env.SECRET_COOCKIE || 'secret',
+  maxAge: 1000 * 60 * 60 * 24,
 }));
 
 
