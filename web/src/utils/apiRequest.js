@@ -9,6 +9,15 @@ export const apiRequest = async (endPoint, method, data, _headers) => {
   });
 };
 
+export const serverRequest = async (endPoint, method, data, _headers) => {
+  return await axios({
+    url: endPoint,
+    headers: _headers,
+    method,
+    data: { ...data }
+  });
+};
+
 export const apiError = (err) => {
   const stringError = String(err);
   const statusCode = Number(stringError.split(" ").slice(-1)[0]);
