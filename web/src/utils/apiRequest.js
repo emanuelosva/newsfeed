@@ -8,3 +8,12 @@ export const apiRequest = async (endPoint, method, data, _headers) => {
     data: { ...data }
   });
 };
+
+export const apiError = (err) => {
+  const stringError = String(err);
+  const statusCode = Number(stringError.split(" ").slice(-1)[0]);
+  if (statusCode === 400) return 'Enter the correct data';
+  if (statusCode === 401) return 'Invalid credentials';
+  if (statusCode === 409) return 'The email is already registred';
+  return 'An error was ocurr';
+};

@@ -1,5 +1,5 @@
 <script>
-  import { apiRequest } from "../utils/apiRequest";
+  import { apiRequest, apiError } from "../utils/apiRequest";
   import { goto } from "@sapper/app";
   let username;
   let email;
@@ -12,17 +12,20 @@
     try {
       const body = { username, email, password };
       const { data, status } = await apiRequest("/users/signup", "POST", body);
-      await goto("/profile");
+      await goto("/login");
     } catch (error) {
-      if (error.data) {
-        statusError = error.response.status;
-        statusMessage = error.data.message;
-      } else {
-        statusError = 500;
-      }
+      statusError = true;
+      statusMessage = apiError(error);
     }
   };
 </script>
+
+<style>
+  .errorSignup {
+    font-size: 16px;
+    color: brown;
+  }
+</style>
 
 <svelte:head>
   <title>Signup</title>
@@ -37,6 +40,9 @@
   <main class="flex col-span-12 md:col-span-8 items-center">
     <div class="mx-auto w-2/3 md:w-1/2 xl:max-w-md">
       <h1 class="text-2xl text-center font-bold">Sign up to Newsfeed</h1>
+      {#if statusError}
+        <p class="errorSignup">{statusMessage}</p>
+      {/if}
       <form action="">
 
         <div class="mb-4">
@@ -49,6 +55,7 @@
             id="username"
             type="text"
             placeholder="Full name"
+            required
             bind:value={username} />
         </div>
 
@@ -62,6 +69,7 @@
             id="email"
             type="email"
             placeholder="email"
+            required
             bind:value={email} />
         </div>
 
@@ -76,6 +84,7 @@
             id="password"
             type="password"
             placeholder="******************"
+            required
             bind:value={password} />
           <p class="text-blue-500 text-xs italic">Please choose a password.</p>
         </div>
