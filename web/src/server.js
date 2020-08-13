@@ -1,6 +1,6 @@
 import sirv from 'sirv';
 import compression from 'compression';
-import helmet from 'helmet';
+// import helmet from 'helmet';
 import * as sapper from '@sapper/server';
 import axios from 'axios';
 const coockieSession = require('cookie-session');
@@ -13,7 +13,7 @@ const API = 'https://newsfeedapi.vercel.app';
 const server = express();
 
 // Security headers
-server.use(helmet());
+// server.use(helmet());
 
 // Parse req
 server.use(express.json());

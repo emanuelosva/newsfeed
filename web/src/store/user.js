@@ -2,7 +2,7 @@ import { writable } from 'svelte/store';
 
 const USER = {
   username: null,
-  news_sites: [],
+  news_sites: ['new_york_times', 'bbc'],
 };
 
 function getUser() {
