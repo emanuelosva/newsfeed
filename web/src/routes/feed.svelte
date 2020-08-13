@@ -1,0 +1,202 @@
+<script>
+
+</script>
+
+<div class="Feed App h-screen mx-auto grid grid-cols-12">
+  <aside class="bg-gray-200 col-span-2">
+    <div class="h-screen sticky top-0 px-8 py-16">
+      <h3 class="font-bold uppercase">Feeds</h3>
+      <ul class="leading-10">
+        <li>
+          <i class="fa fa-chevron-down mr-2" />
+          <button>BBC</button>
+        </li>
+        <li>
+          <i class="fa fa-chevron-down mr-2" />
+          <button>NYT</button>
+        </li>
+        <li>
+          <i class="fa fa-chevron-down mr-2" />
+          <button>ElUni</button>
+        </li>
+      </ul>
+      <p class="mt-4">
+        <button>Add a news provider</button>
+      </p>
+    </div>
+  </aside>
+  <main class="flex-grow col-span-9 p-16">
+    <section class="flex relative border shadow px-8 py-4 mb-8 items-center">
+      <svg
+        class="text-gray-600 h-4 w-4 fill-current"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        version="1.1"
+        id="Capa_1"
+        x="0px"
+        y="0px"
+        viewBox="0 0 56.966 56.966"
+        style="enable-background: new 0 0 56.966 56.966;"
+        xml:space="preserve"
+        width="512px"
+        height="512px">
+        <path
+          d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23
+          s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92
+          c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z
+          M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17
+          s-17-7.626-17-17S14.61,6,23.984,6z" />
+      </svg>
+      <input
+        class="h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-full"
+        type="search"
+        name="search"
+        placeholder="Search" />
+    </section>
+    <section class="grid grid-cols-2 lg:grid-cols-3 gap-6">
+      <article class="relative rounded border shadow-md overflow-hidden">
+        <a
+          href="https://www.nytimes.com/es/2020/08/10/espanol/cultura/jovita-idar-laredo-activista.html">
+          <figure class="object-cover">
+            <img
+              class="w-full"
+              src="https://static01.nyt.com/images/2020/08/10/obituaries/10Overlooked-Idar-ES-00/07overlooked-idar01-thumbWide.jpg?quality=75&auto=webp&disable=upscale"
+              alt="Jovita Idár, activista de los derechos de los
+              mexicoestadounidenses y las mujeres" />
+          </figure>
+          <span
+            class="absolute top-0 px-4 py-1 mt-4 bg-orange-400 bg-opacity-75
+            text-white text-xs">
+            BBC
+          </span>
+          <div class="p-4">
+            <h2 class="text-base font-bold leading-snug tracking-tight">
+              Jovita Idár, activista de los derechos de los
+              mexicoestadounidenses y las mujeres
+            </h2>
+            <hr class="w-10 border-t-4 border-orange-400 my-4" />
+            <p class="text-xs">
+              Como maestra, escritora y editora, Idár preservó la cultura
+              mexicana en el sur de Texas, promovió la igualdad de derechos de
+              las mujeres y las exhortó a estudiar y participar en la política.
+            </p>
+          </div>
+        </a>
+      </article>
+      <article class="relative rounded border shadow-md overflow-hidden">
+        <a
+          href="https://www.nytimes.com/es/2020/08/09/espanol/estilos-de-vida/amor-animales.html">
+          <figure class="object-cover">
+            <img
+              class="w-full"
+              src="https://static01.nyt.com/images/2020/08/02/fashion/02MODERN-FARM/02MODERN-FARM-thumbWide.jpg?quality=75&auto=webp&disable=upscale"
+              alt="Jovita Idár, activista de los derechos de los
+              mexicoestadounidenses y las mujeres" />
+          </figure>
+          <span
+            class="absolute top-0 px-4 py-1 mt-4 bg-orange-400 bg-opacity-75
+            text-white text-xs">
+            BBC
+          </span>
+          <div class="p-4">
+            <h2 class="text-base font-bold leading-snug tracking-tight">
+              Dediqué todo mi amor a los animales
+            </h2>
+            <hr class="w-10 border-t-4 border-orange-400 my-4" />
+            <p class="text-xs">
+              En una época difícil busqué consuelo en los caballos, las cabras e
+              incluso un osezno. La pandemia actual me condujo de nuevo hasta
+              ellos.
+            </p>
+          </div>
+        </a>
+      </article>
+      <article class="relative rounded border shadow-md overflow-hidden">
+        <a href="https://www.bbc.com/mundo/noticias-53723975">
+          <figure class="object-cover">
+            <img
+              class="w-full"
+              src="https://ichef.bbci.co.uk/live-experience/cps/320/cpsprodpb/183F6/production/_113881399_gettyimages-1212920586.jpg"
+              alt="Jovita Idár, activista de los derechos de los
+              mexicoestadounidenses y las mujeres" />
+          </figure>
+          <span
+            class="absolute top-0 px-4 py-1 mt-4 bg-orange-400 bg-opacity-75
+            text-white text-xs">
+            New York Times
+          </span>
+          <div class="p-4">
+            <h2 class="text-base font-bold leading-snug tracking-tight">
+              El mundo alcanza los 20 millones de casos de coronavirus: los
+              gráficos que muestran dónde se propaga más (y qué pasa en América
+              Latina)
+            </h2>
+            <hr class="w-10 border-t-4 border-orange-400 my-4" />
+            <p class="text-xs">
+              Casi cinco meses después de que se declaró la pandemia global, el
+              coronavirus continúa propagándose por el mundo. Estos gráficos y
+              mapas te explican cómo el virus se manifiesta en las diferentes
+              regiones del planeta.
+            </p>
+          </div>
+        </a>
+      </article>
+      <article class="relative rounded border shadow-md overflow-hidden">
+        <a href="https://www.bbc.com/mundo/noticias-internacional-53731824">
+          <figure class="object-cover">
+            <img
+              class="w-full"
+              src="https://ichef.bbci.co.uk/live-experience/cps/320/cpsprodpb/F9B8/production/_113882936_044c9764-8f2c-4152-be44-30175d3b8ebc.jpg"
+              alt="Jovita Idár, activista de los derechos de los
+              mexicoestadounidenses y las mujeres" />
+          </figure>
+          <span
+            class="absolute top-0 px-4 py-1 mt-4 bg-orange-400 bg-opacity-75
+            text-white text-xs">
+            New York Times
+          </span>
+          <div class="p-4">
+            <h2 class="text-base font-bold leading-snug tracking-tight">
+              Un herido en un tiroteo cerca de la Casa Blanca que obliga a Trump
+              a resguardarse durante unos minutos
+            </h2>
+            <hr class="w-10 border-t-4 border-orange-400 my-4" />
+            <p class="text-xs">
+              El presidente de Estados Unidos, Donald Trump, interrumpió su
+              presencia diaria ante los medios de forma abrupta y luego regresó
+              y explicó lo sucedido.
+            </p>
+          </div>
+        </a>
+      </article>
+      <article class="relative rounded border shadow-md overflow-hidden">
+        <a
+          href="https://www.eluniversal.com.mx/nacion/giran-orden-de-aprehension-contra-jesus-orta-ex-jefe-de-policia-en-cdmx-por-delincuencia">
+          <figure class="object-cover">
+            <img
+              class="w-full"
+              src="https://www.eluniversal.com.mx/sites/default/files/2020/08/10/_fgr_jesus_orta.jpg"
+              alt="Jovita Idár, activista de los derechos de los
+              mexicoestadounidenses y las mujeres" />
+          </figure>
+          <span
+            class="absolute top-0 px-4 py-1 mt-4 bg-orange-400 bg-opacity-75
+            text-white text-xs">
+            El Universal
+          </span>
+          <div class="p-4">
+            <h2 class="text-base font-bold leading-snug tracking-tight">
+              Giran orden de aprehensión contra Jesús Orta, ex jefe de policía
+              en CDMX, por delincuencia organizada
+            </h2>
+            <hr class="w-10 border-t-4 border-orange-400 my-4" />
+            <p class="text-xs">
+              Este sábado EL UNIVERSAL publicó que la FGR había pedido girar las
+              órdenes de aprehensión relacionadas con desvíos millonarios.
+            </p>
+          </div>
+        </a>
+      </article>
+    </section>
+  </main>
+</div>
