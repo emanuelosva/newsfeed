@@ -9,48 +9,6 @@
       href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;600;700&display=swap"
       rel="stylesheet"
     />
-    <style>
-      [x-cloak] {
-        display: none;
-      }
-
-      [type="checkbox"] {
-        box-sizing: border-box;
-        padding: 0;
-      }
-
-      .form-checkbox {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        -webkit-print-color-adjust: exact;
-        color-adjust: exact;
-        display: inline-block;
-        vertical-align: middle;
-        background-origin: border-box;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        flex-shrink: 0;
-        color: currentColor;
-        background-color: #fff;
-        border-color: #e2e8f0;
-        border-width: 1px;
-        border-radius: 0.25rem;
-        height: 1.2em;
-        width: 1.2em;
-      }
-
-      .form-checkbox:checked {
-        background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
-        border-color: transparent;
-        background-color: currentColor;
-        background-size: 100% 100%;
-        background-position: center;
-        background-repeat: no-repeat;
-      }
-    </style>
   </head>
   <body>
     <div class="App h-screen mx-auto grid grid-cols-12">
@@ -173,7 +131,118 @@
           </section>
           <section>
             <div class="w-full">
-              <h3 class="text-2xl border-b">My suscriptions</h3>
+              <h3 class="text-2xl mb-4">My suscriptions</h3>
+              <table class="text-gray-600 border-collapse table-auto w-full table-striped">
+                <thead>
+                  <tr class="text-white bg-orange-400 text-orange-100">
+                    <th class="py-2 px-3">
+                      <input type="checkbox" name="" id="">
+                    </th>
+                    <th class="text-left py-2 px-3">Name</th>
+                    <th class="py-2 px-3">Update</th>
+                    <th class="py-2 px-3">Active</th>
+                    <th class="py-2 px-3">Engagement</th>
+                    <th class="py-2 px-3"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="text-center">
+                    <td class="py-2 px-3">
+                      <input type="checkbox" name="" id="">
+                    </td>
+                    <td class="font-semibold text-gray-800 text-left py-2 px-3">BBC</td>
+                    <td class="py-2 px-3">5d</td>
+                    <td class="py-2 px-3">
+                      <div class="flex justify-center items-center" x-data="{ toggle: '1' }">
+                        <div class="relative rounded-full w-12 h-6 transition duration-200 ease-linear" :class="[toggle === '1' ? 'bg-green-400' : 'bg-gray-400']">
+                          <label for="toggle-1" class="absolute left-0 bg-white border-2 mb-2 w-6 h-6 rounded-full transition transform duration-100 ease-linear cursor-pointer" :class="[toggle === '1' ? 'translate-x-full border-green-400' : 'translate-x-0 border-gray-400']"></label>
+                          <input type="checkbox" id="toggle-1" name="toggle" class="appearance-none w-full h-full active:outline-none focus:outline-none" @click="toggle === '0' ? toggle = '1' : toggle = '0'">
+                        </div>
+                      </div>
+                    </td>
+                    <td class="py-2 px-3">85%</td>
+                    <td class="py-2 px-3">
+                      <i class="fa fa-trash"></i>
+                    </td>
+                  </tr>
+                  <tr class="text-center">
+                    <td class="py-2 px-3">
+                      <input type="checkbox" name="" id="">
+                    </td>
+                    <td class="font-semibold text-gray-800 text-left py-2 px-3">New York Times</td>
+                    <td class="py-2 px-3">3d</td>
+                    <td class="py-2 px-3">
+                      <div class="flex justify-center items-center" x-data="{ toggle: '1' }">
+                        <div class="relative rounded-full w-12 h-6 transition duration-200 ease-linear" :class="[toggle === '1' ? 'bg-green-400' : 'bg-gray-400']">
+                          <label for="toggle-2" class="absolute left-0 bg-white border-2 mb-2 w-6 h-6 rounded-full transition transform duration-100 ease-linear cursor-pointer" :class="[toggle === '1' ? 'translate-x-full border-green-400' : 'translate-x-0 border-gray-400']"></label>
+                          <input type="checkbox" id="toggle-2" name="toggle" class="appearance-none w-full h-full active:outline-none focus:outline-none" @click="toggle === '0' ? toggle = '1' : toggle = '0'">
+                        </div>
+                      </div>
+                    </td>
+                    <td class="py-2 px-3">90%</td>
+                    <td class="py-2 px-3">
+                      <i class="fa fa-trash"></i>
+                    </td>
+                  </tr>
+                  <tr class="text-center">
+                    <td class="py-2 px-3">
+                      <input type="checkbox" name="" id="">
+                    </td>
+                    <td class="font-semibold text-gray-800 text-left py-2 px-3">El Universal</td>
+                    <td class="py-2 px-3">5d</td>
+                    <td class="py-2 px-3">
+                      <div class="flex justify-center items-center" x-data="{ toggle: '1' }">
+                        <div class="relative rounded-full w-12 h-6 transition duration-200 ease-linear" :class="[toggle === '1' ? 'bg-green-400' : 'bg-gray-400']">
+                          <label for="toggle-3" class="absolute left-0 bg-white border-2 mb-2 w-6 h-6 rounded-full transition transform duration-100 ease-linear cursor-pointer" :class="[toggle === '1' ? 'translate-x-full border-green-400' : 'translate-x-0 border-gray-400']"></label>
+                          <input type="checkbox" id="toggle-3" name="toggle" class="appearance-none w-full h-full active:outline-none focus:outline-none" @click="toggle === '0' ? toggle = '1' : toggle = '0'">
+                        </div>
+                      </div>
+                    </td>
+                    <td class="py-2 px-3">80%</td>
+                    <td class="py-2 px-3">
+                      <i class="fa fa-trash"></i>
+                    </td>
+                  </tr>
+                  <tr class="text-center">
+                    <td class="py-2 px-3">
+                      <input type="checkbox" name="" id="">
+                    </td>
+                    <td class="font-semibold text-gray-800 text-left py-2 px-3">Milenio</td>
+                    <td class="py-2 px-3">20d</td>
+                    <td class="py-2 px-3">
+                      <div class="flex justify-center items-center" x-data="{ toggle: '0' }">
+                        <div class="relative rounded-full w-12 h-6 transition duration-200 ease-linear" :class="[toggle === '1' ? 'bg-green-400' : 'bg-gray-400']">
+                          <label for="toggle-4" class="absolute left-0 bg-white border-2 mb-2 w-6 h-6 rounded-full transition transform duration-100 ease-linear cursor-pointer" :class="[toggle === '1' ? 'translate-x-full border-green-400' : 'translate-x-0 border-gray-400']"></label>
+                          <input type="checkbox" id="toggle-4" name="toggle" class="appearance-none w-full h-full active:outline-none focus:outline-none" @click="toggle === '0' ? toggle = '1' : toggle = '0'">
+                        </div>
+                      </div>
+                    </td>
+                    <td class="py-2 px-3">80%</td>
+                    <td class="py-2 px-3">
+                      <i class="fa fa-trash"></i>
+                    </td>
+                  </tr>
+                  <tr class="text-center">
+                    <td class="py-2 px-3">
+                      <input type="checkbox" name="" id="">
+                    </td>
+                    <td class="font-semibold text-gray-800 text-left py-2 px-3">Excélsior</td>
+                    <td class="py-2 px-3">15d</td>
+                    <td class="py-2 px-3">
+                      <div class="flex justify-center items-center" x-data="{ toggle: '0' }">
+                        <div class="relative rounded-full w-12 h-6 transition duration-200 ease-linear" :class="[toggle === '1' ? 'bg-green-400' : 'bg-gray-400']">
+                          <label for="toggle-5" class="absolute left-0 bg-white border-2 mb-2 w-6 h-6 rounded-full transition transform duration-100 ease-linear cursor-pointer" :class="[toggle === '1' ? 'translate-x-full border-green-400' : 'translate-x-0 border-gray-400']"></label>
+                          <input type="checkbox" id="toggle-5" name="toggle" class="appearance-none w-full h-full active:outline-none focus:outline-none" @click="toggle === '0' ? toggle = '1' : toggle = '0'">
+                        </div>
+                      </div>
+                    </td>
+                    <td class="py-2 px-3">80%</td>
+                    <td class="py-2 px-3">
+                      <i class="fa fa-trash"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </section>
         </div>
