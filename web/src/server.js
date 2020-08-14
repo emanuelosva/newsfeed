@@ -10,7 +10,7 @@ const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV !== 'production';
 const API = 'https://newsfeedapi.vercel.app';
 
-const server = express();
+const server = (module.exports = express());
 
 // Security headers
 // server.use(helmet());
@@ -94,7 +94,9 @@ server.use(compression({ threshold: 0 }));
 server.use(sirv('static', { dev }));
 server.use(sapper.middleware());
 
-// Server initialization
+//Server initialization
 server.listen(PORT, (err) => {
   if (err) throw new Error('Server Error');
 });
+
+// export default server;

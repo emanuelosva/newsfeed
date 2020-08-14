@@ -1,4 +1,16 @@
-import { timestamp, files, shell, routes } from '@sapper/service-worker';
+import { files, shell, routes } from '@sapper/service-worker';
+
+// For vercel deploy
+const timestamp = process.env.SAPPER_TIMESTAMP; // instead of `import { timestamp }`
+
+
+export default {
+  plugins: [
+    replace({
+      'process.env.SAPPER_TIMESTAMP': process.env.SAPPER_TIMESTAMP || Date.now()
+    })
+  ]
+}
 
 const ASSETS = `cache${timestamp}`;
 
