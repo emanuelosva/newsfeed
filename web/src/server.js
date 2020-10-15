@@ -1,31 +1,21 @@
 import sirv from 'sirv';
 import compression from 'compression';
-// import helmet from 'helmet';
 import * as sapper from '@sapper/server';
+import coockieParser from 'cookie-parser';
+import express from 'express';
 import axios from 'axios';
-const coockieSession = require('cookie-session');
-const express = require('express');
 
 const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV !== 'production';
 const API = 'https://newsfeedapi.vercel.app';
 
-const server = (module.exports = express());
+const server = express()
 
-// Security headers
-// server.use(helmet());
 
 // Parse req
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
-
-// Session manage
-server.use(coockieSession({
-  secure: !dev,
-  httpOnly: !dev,
-  secret: process.env.SECRET_COOCKIE || 'secret',
-  maxAge: 1000 * 60 * 60 * 24,
-}));
+server.use(coockieParser());
 
 
 /**
@@ -42,7 +32,11 @@ server.post('/server/login', async (req, res) => {
       data: { ...body },
     });
 
-    req.session.token = data.data.token;
+    res.cookie('token', data.data.token, {
+      secure: !dev,
+      httpOnly: !dev,
+      maxAge: 1000 * 60 * 60 * 24,
+    })
     res.send(data.data.user);
   } catch (error) {
     res.status(error.response.status).send(error)
@@ -51,17 +45,21 @@ server.post('/server/login', async (req, res) => {
 
 // Destroy coockie session
 server.post('/server/logout', (req, res) => {
-  req.session = null;
+  res.cookie('token', undefined, {
+    secure: !dev,
+    httpOnly: !dev,
+    maxAge: 0,
+  })
   res.status(200).send('Logout')
 });
 
 // New subscription
 server.post('/server/subscribe', async (req, res) => {
-  const { body } = req;
+  const { body, cookies } = req;
   try {
     const { status, data } = await axios({
       url: `${API}/users`,
-      headers: { Authorization: `Bearer ${req.session.token}` },
+      headers: { Authorization: `Bearer ${cookies['token']}` },
       method: 'POST',
       data: { ...body },
     });
@@ -74,11 +72,11 @@ server.post('/server/subscribe', async (req, res) => {
 
 // New subscription
 server.delete('/server/unsubscribe', async (req, res) => {
-  const { body } = req;
+  const { body, cookies } = req;
   try {
     const { status, data } = await axios({
       url: `${API}/users`,
-      headers: { Authorization: `Bearer ${req.session.token}` },
+      headers: { Authorization: `Bearer ${cookies['token']}` },
       method: 'DELETE',
       data: { ...body },
     });
@@ -99,4 +97,4 @@ server.listen(PORT, (err) => {
   if (err) throw new Error('Server Error');
 });
 
-// export default server;
+export default server;

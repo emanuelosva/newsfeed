@@ -1,9 +1,20 @@
 {
   "version": 2,
-  "alias": "five-neewsfeed",
+  "alias": "five-newsfeed",
   "env": {
     "PORT": "8080",
     "NODE_ENV": "production",
     "SECRET_COOCKIE": "@neewsfeed-secret-cocckie"
-  }
+  },
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "vercel-sapper",
+      "config": {
+        "include": [
+          "static"
+        ]
+      }
+    }
+  ]
 }
